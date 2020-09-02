@@ -1,7 +1,7 @@
-/* Seeds for SQL table. We haven't discussed this type of file yet */
+/* Seeds for SQL table. */
 USE employee_tracker;
 
-/* Insert 3 Rows into your new table */
+/* Insert 3 Rows into a new table */
 INSERT INTO department (id, name)
 VALUES ("test");
 
