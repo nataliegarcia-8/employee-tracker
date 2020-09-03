@@ -3,7 +3,7 @@ const prompts = require('./config/prompts')
 const connection = require('./config/connection')
 
 start()
-
+// START FUNCTION 
 function start() {
     inquirer.prompt(prompts.start)
         .then(function (res) {
@@ -35,18 +35,19 @@ function start() {
 async function addEmployee() {
     const qryDpt = 'SELECT \
     id AS value, \
-    firstName, \
-    lastName'
+    title \
+    FROM role'
     
-    const qryInsert = 'INSERT INTO employee (firstName, lastName, role_id, manager_id) \
+    const qryInsert = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) \
     VALUES (?,?,?,?)'
     
     try {
         const roles = await connection.query(qryDpt)
         const answer = await inquirer.prompt(prompts.addEmployee(roles))
         
-        const data = [answer.firstName, answer.lastName, answer.role_id, answer.manager_id]
-        await connection.query(qryInsert, data)
+        const data = [answer.first_name, answer.last_name, answer.role_id, answer.manager_id]
+        const result = await connection.query(qryInsert, data)
+        console.table(result)
         start();
     } catch (error) {
         console.log(error.message)
@@ -69,7 +70,8 @@ async function addRole() {
         const answer = await inquirer.prompt(prompts.addRole(departments))
         
         const data = [answer.title, answer.salary, answer.department_id]
-        await connection.query(qryInsert, data)
+        const result = await connection.query(qryInsert, data)
+        console.table(result)
         start();
     } catch (error) {
         console.log(error.message)
@@ -145,9 +147,9 @@ async function viewRoles() {
 //VIEW EMPLOYEES
 async function viewEmployees() {
     const qry = 'SELECT, \
-                employee.id, \
-                firstName, \
-                lastName, \
+                employee.id AS employee_id, \
+                first_name, \
+                last_name, \
                 role_id, \
                 manager_id \
                 FROM employee \

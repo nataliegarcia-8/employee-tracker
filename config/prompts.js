@@ -41,28 +41,26 @@ module.exports = {
             type: "list",
             choices: departments
         }],
-        addEmployee: (departments) => [
+        addEmployee: (roles) => [
             {
-                name: "firstName",
+                name: "first_name",
                 message: "What is the employee's first name?",
                 type: "input"
             },
             {
-                name: "lastName",
+                name: "last_name",
                 message: "What is the employee's last name?",
-                type: "input",
-                validate: (val) => !isNaN(val)
+                type: "input"
             },
             {
                 name: "role_id",
                 message: "What is the employees role?",
                 type: "list",
                 choices: roles
-            },
-            {
-                name: "manager_id",
-                message: "Who is the manager of this employee?",
-                type: "list",
-                choices: managers
-            }]
-}
+            }]}
+            // {
+            //     name: "manager_id",
+            //     message: "Who is the manager of this employee?",
+            //     type: "list",
+            //     choices: managers
+            // }]
