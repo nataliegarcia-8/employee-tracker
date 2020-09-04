@@ -38,23 +38,20 @@ async function addEmployee() {
     title \
     FROM role'
     
-    const qryInsert = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) \
-    VALUES (?,?,?,?)'
+    const qryInsert = 'INSERT INTO employee (first_name, last_name, role_id) \
+    VALUES (?,?,?)'
     
     try {
         const roles = await connection.query(qryDpt)
         const answer = await inquirer.prompt(prompts.addEmployee(roles))
         
-        const data = [answer.first_name, answer.last_name, answer.role_id, answer.manager_id]
-        const result = await connection.query(qryInsert, data)
-        console.table(result)
+        const data = [answer.first_name, answer.last_name, answer.role_id]
+        await connection.query(qryInsert, data)
         start();
     } catch (error) {
         console.log(error.message)
     }
 }
-
-
 //ADD ROLE
 async function addRole() {
     const qryDpt = 'SELECT \
@@ -71,7 +68,6 @@ async function addRole() {
         
         const data = [answer.title, answer.salary, answer.department_id]
         const result = await connection.query(qryInsert, data)
-        console.table(result)
         start();
     } catch (error) {
         console.log(error.message)
@@ -88,8 +84,7 @@ function addDepartment() {
         
         connection.query(qry, data, function (err, result) {
             if (err) throw err;
-            
-            console.table(result)
+
             start()
         })
     })
@@ -146,15 +141,12 @@ async function viewRoles() {
 }
 //VIEW EMPLOYEES
 async function viewEmployees() {
-    const qry = 'SELECT, \
-                employee.id AS employee_id, \
-                first_name, \
-                last_name, \
-                role_id, \
-                manager_id \
-                FROM employee \
-                LEFT JOIN role \
-                ON employee.role_id = role.id'
+    const qry = 'SELECT \
+                employee.id, \
+                employee.first_name, \
+                employee.last_name \
+                FROM employee;'
+    
     try {
         const result = await connection.query(qry)
         console.table(result)
