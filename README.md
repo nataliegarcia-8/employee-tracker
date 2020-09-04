@@ -4,7 +4,6 @@
 * [Description](#description)
 * [Usage](#usage)
 * [Links](#links)
-* [Screenshots](#screenshots)
 * [Questions](#questions)
 
 ## Description
@@ -17,12 +16,7 @@ This application can be used to organize and maintain a busniess to keep track o
 ## Links
 Github Repo: https://github.com/nataliegarcia-8/employee-tracker
 
-Video Walk-through link: 
-
-## Screenshots
-home screen:
-<img src="img/" alt="home screen image">
-
+Video Walk-through link: https://drive.google.com/file/d/1acI8fU9YlL_IqmvwqBV-twKZKPSd6_yQ/view
 
 ## Questions 
 ### If you have any questions please contact me at:
